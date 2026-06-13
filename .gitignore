@@ -60,3 +60,8 @@ python/setup.py
 
 # Xmake
 .xmake/
+
+maxwell_example/*.bin
+maxwell_example/*.onnx
+maxwell_example/*.param
+maxwell_example/*.pt
