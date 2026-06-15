@@ -8,6 +8,7 @@ def test_inference():
     out = []
 
     with ncnn.Net() as net:
+        net.opt.use_vulkan_compute = True
         net.load_param("maxwell_model.ncnn.param")
         net.load_model("maxwell_model.ncnn.bin")
 

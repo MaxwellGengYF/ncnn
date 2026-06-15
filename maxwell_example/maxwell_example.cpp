@@ -58,7 +58,7 @@ int main(int argc, char** argv)
     join_path(ref_path, model_dir, "pytorch_output.bin");
 
     ncnn::Net net;
-    net.opt.use_vulkan_compute = false;
+    net.opt.use_vulkan_compute = true;
 
     if (net.load_param(param_path.c_str()) != 0)
     {
