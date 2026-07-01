@@ -40,7 +40,7 @@ jobs:
       PYTHONUSERBASE: ${{ github.workspace }}/torch
       UseMultiToolTask: true
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - uses: actions/setup-python@v6
       with:
@@ -69,7 +69,7 @@ jobs:
     runs-on: [self-hosted, linux, ubuntu25]
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: local-cache-libtorch
       id: local-cache-libtorch
@@ -94,28 +94,28 @@ jobs:
 
     - name: cache-libtorch
       id: cache-libtorch
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: libtorch-${{ env.LIBTORCH_VERSION }}-install
         key: libtorch-${{ env.LIBTORCH_VERSION }}-linux-install-${{ env.CACHE_DATE }}
 
     - name: cache-torchvision
       id: cache-torchvision
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: torchvision-${{ env.TORCHVISION_VERSION }}-install
         key: torchvision-${{ env.TORCHVISION_VERSION }}-linux-install-${{ env.CACHE_DATE }}
 
     - name: cache-onnxruntime
       id: cache-onnxruntime
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: onnxruntime-${{ env.ONNXRUNTIME_VERSION }}-install
         key: onnxruntime-${{ env.ONNXRUNTIME_VERSION }}-linux-install-${{ env.CACHE_DATE }}
 
     - name: pnnx-patches
       if: (steps.local-cache-libtorch.outputs.cache-hit != 'true' && steps.cache-libtorch.outputs.cache-hit != 'true') || (steps.local-cache-torchvision.outputs.cache-hit != 'true' && steps.cache-torchvision.outputs.cache-hit != 'true') || (steps.local-cache-onnxruntime.outputs.cache-hit != 'true' && steps.cache-onnxruntime.outputs.cache-hit != 'true')
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         repository: pnnx/pnnx
         path: pnnx-patches
@@ -264,7 +264,7 @@ jobs:
       PYTHONUSERBASE: ${{ github.workspace }}/python-${{ matrix.python }}
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         submodules: true
 
@@ -292,7 +292,7 @@ jobs:
     - name: cache-libtorch
       if: steps.local-cache-libtorch.outputs.cache-hit != 'true'
       id: cache-libtorch
-      uses: actions/cache/restore@v5
+      uses: actions/cache/restore@v6
       with:
         path: libtorch-${{ env.LIBTORCH_VERSION }}-install
         key: libtorch-${{ env.LIBTORCH_VERSION }}-linux-install-${{ env.CACHE_DATE }}
@@ -301,7 +301,7 @@ jobs:
     - name: cache-torchvision
       if: steps.local-cache-torchvision.outputs.cache-hit != 'true'
       id: cache-torchvision
-      uses: actions/cache/restore@v5
+      uses: actions/cache/restore@v6
       with:
         path: torchvision-${{ env.TORCHVISION_VERSION }}-install
         key: torchvision-${{ env.TORCHVISION_VERSION }}-linux-install-${{ env.CACHE_DATE }}
@@ -310,7 +310,7 @@ jobs:
     - name: cache-onnxruntime
       if: steps.local-cache-onnxruntime.outputs.cache-hit != 'true'
       id: cache-onnxruntime
-      uses: actions/cache/restore@v5
+      uses: actions/cache/restore@v6
       with:
         path: onnxruntime-${{ env.ONNXRUNTIME_VERSION }}-install
         key: onnxruntime-${{ env.ONNXRUNTIME_VERSION }}-linux-install-${{ env.CACHE_DATE }}
